@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import Album from './Album';
+import LibFasc from './LibFasc';
 
 function App() {
   return (
     <div className="App">
-      <Album />
+      <LibFasc />
     </div>
   );
 }
