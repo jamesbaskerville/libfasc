@@ -12,6 +12,8 @@ export function generateCards(type, n) {
   return libCards;
 }
 
+// Fisher-Yates Shuffle algorithm
+// https://bost.ocks.org/mike/shuffle/
 export function shuffle(array) {
   var m = array.length, t, i;
 

@@ -48,14 +48,14 @@ export default class LibFasc extends React.Component {
   }
 
   updateScore = (score) => {
+    this.setState({
+      cards: shuffle(allCards),
+    });
     if (score > this.state.bestScore) {
       this.setState({
         bestScore: score,
       });
     }
-    this.setState({
-      cards: shuffle(allCards),
-    });
   }
 
   render() {
