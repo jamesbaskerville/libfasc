@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 
 import CardGrid from './CardGrid';
 
+import { playAudio } from './utils';
+
 const useStyles = makeStyles(theme => ({
   guess: {
     backgroundColor: "white",
@@ -13,7 +15,11 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(8),
   },
   guessButton: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
+    fontSize: 40,
+  },
+  slapArea: {
+    flexGrow: 1,
   },
   cardGrid: {
     backgroundColor: "gainsboro",
@@ -24,6 +30,13 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(2),
   },
 }));
+
+const slapSoundPath = process.env.PUBLIC_URL + "sounds/slap.m4a";
+
+// play slap with random volume between 0.3 and 1
+const playSlap = () => {
+  playAudio(slapSoundPath, Math.random() * 0.7 + 0.3)
+}
 
 class Guess extends React.Component {
   render() {
@@ -62,6 +75,13 @@ function GuessWrapper(props) {
   );
 }
 
+function SlapArea(props) {
+  const classes = useStyles();
+  return (
+    <Box className={classes.slapArea} onClick={() => {playSlap()}} />
+  );
+}
+
 function ResultGrid(props) {
   const classes = useStyles();
   return (
@@ -91,6 +111,7 @@ export default class Game extends React.Component {
     const actual = this.props.cards[this.state.counter].cardType;
 
     if (guess === actual) {
+      playSlap();
       this.setState((prevState, props) => ({
         counter: prevState.counter + 1
       }));
@@ -106,7 +127,6 @@ export default class Game extends React.Component {
         best: newBest
       });
     }
-    alert("Game over!");
     this.resetGame();
   }
 
@@ -115,9 +135,13 @@ export default class Game extends React.Component {
       <React.Fragment>
         <main style={{ width: '100%' }}>
           <Container maxWidth="lg">
-            <GuessWrapper
-              onGuess={this.onGuess}
-              cardNumber={this.state.counter} />
+            <Box display="flex">
+              <SlapArea />
+              <GuessWrapper
+                onGuess={this.onGuess}
+                cardNumber={this.state.counter} />
+              <SlapArea />
+            </Box>
             <ResultGrid
               cards={this.props.cards}
               cardNumber={this.state.counter} />

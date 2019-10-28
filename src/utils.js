@@ -29,3 +29,10 @@ export function shuffle(array) {
 
   return array;
 }
+
+// play music
+export function playAudio(url, volume = 1.0) {
+  var a = new Audio(url);
+  a.volume = volume;
+  a.play();
+}

@@ -20,7 +20,7 @@ const LIB_CARD_COUNT = 6;
 const FASC_CARD_COUNT = 11;
 const libCards = generateCards('liberal', LIB_CARD_COUNT);
 const fascCards = generateCards('fascist', FASC_CARD_COUNT);
-const allCards = shuffle(libCards.concat(fascCards));
+const allCards = libCards.concat(fascCards);
 
 function Footer() {
   const classes = useStyles();
@@ -43,15 +43,19 @@ export default class LibFasc extends React.Component {
     super(props);
     this.state = {
       bestScore: 0,
+      cards: shuffle(allCards),
     }
   }
 
   updateScore = (score) => {
     if (score > this.state.bestScore) {
       this.setState({
-        bestScore: score
+        bestScore: score,
       });
     }
+    this.setState({
+      cards: shuffle(allCards),
+    });
   }
 
   render() {
