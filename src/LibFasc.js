@@ -38,13 +38,32 @@ function Footer() {
   );
 }
 
-export default function LibFasc() {
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <NavBar />
-      <Game cards={allCards}/>
-      <Footer />
-    </React.Fragment>
-  );
+export default class LibFasc extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bestScore: 0,
+    }
+  }
+
+  updateScore = (score) => {
+    if (score > this.state.bestScore) {
+      this.setState({
+        bestScore: score
+      });
+    }
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <NavBar score={this.state.bestScore} />
+        <Game
+          cards={allCards}
+          onGameEnd={this.updateScore} />
+        <Footer />
+      </React.Fragment>
+    );
+  }
 }

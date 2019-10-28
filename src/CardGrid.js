@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import LibFascCard from './LibFascCard';
 
 export default function CardGrid(props) {
-  const cards = props.cards.slice(0, props.index);
+  const cards = props.cards.slice(0, props.maxIndex);
 
   return (
     <Grid container spacing={1}>

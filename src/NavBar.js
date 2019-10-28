@@ -11,10 +11,13 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     marginRight: "auto",
-  }
+  },
+  score: {
+    paddingRight: 10,
+  },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
   const classes = useStyles();
 
   return (
@@ -23,6 +26,9 @@ export default function NavBar() {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             LibFasc
+          </Typography>
+          <Typography variant="h7" className={classes.score}>
+            Top Score: {props.score}
           </Typography>
           <Button color="inherit">Play</Button>
           <Button color="inherit">Rules</Button>

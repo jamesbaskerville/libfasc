@@ -1,13 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 
 import CardGrid from './CardGrid';
 
 const useStyles = makeStyles(theme => ({
   guess: {
-    backgroundColor: "gainsboro",
+    backgroundColor: "white",
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
@@ -15,42 +16,58 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
   },
   cardGrid: {
-    backgroundColor: "darkgrey",
+    backgroundColor: "gainsboro",
+    minHeight: 160 + theme.spacing(8) * 2,
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 }));
 
-function Guess(props) {
+class Guess extends React.Component {
+  render() {
+    return (
+      <Box className={this.props.classes.guess}>
+        <Button
+          variant="outlined"
+          className={this.props.classes.guessButton}
+          color="primary"
+          onClick={() => this.props.onGuess("liberal")}
+          value="liberal">
+          LIB
+        </Button>
+        <Button
+          variant="outlined"
+          className={this.props.classes.guessButton}
+          color="secondary"
+          onClick={() => this.props.onGuess("fascist")}
+          value="fascist">
+          FASC
+        </Button>
+      </Box>
+    );
+  }
+}
+
+function GuessWrapper(props) {
   const classes = useStyles();
   return (
-    <Container className={classes.guess} maxWidth="lg">
-      <Button
-        variant="outlined"
-        className={classes.guessButton}
-        color="primary"
-        onClick={props.onClick}
-        value="liberal">
-        LIB
-      </Button>
-      <Button
-        variant="outlined"
-        className={classes.guessButton}
-        color="secondary"
-        onClick={props.onClick}
-        value="fascist">
-        FASC
-      </Button>
-    </Container>
+    <Guess
+      classes={classes}
+      cardNumber={props.cardNumber}
+      onGuess={props.onGuess}
+      onFailure={props.onFailure}
+    />
   );
 }
 
 function ResultGrid(props) {
   const classes = useStyles();
   return (
-    <Container className={classes.cardGrid} maxWidth="lg">
-      <CardGrid cards={props.cards} index={props.index} />
-    </Container>
+    <Box className={classes.cardGrid}>
+      <CardGrid cards={props.cards} maxIndex={props.cardNumber} />
+    </Box>
   );
 }
 
@@ -58,29 +75,53 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      counter: 0,
+      best: 0,
     }
   }
 
-  guessCard = (choice) => {
-    const actual = this.props.cards[this.state.index].cardType;
-    if (choice === actual) {
-      this.state.index++;
+  resetGame() {
+    this.props.onGameEnd(this.state.counter);
+    this.setState({
+      counter: 0
+    });
+  }
+
+  onGuess = (guess) => {
+    const actual = this.props.cards[this.state.counter].cardType;
+
+    if (guess === actual) {
+      this.setState((prevState, props) => ({
+        counter: prevState.counter + 1
+      }));
     } else {
-      this.endGame()
+      this.endGame();
     }
   }
 
-  endGame() {
-    return;
+  endGame = () => {
+    if (this.state.counter >= this.state.best) {
+      const newBest = this.state.counter;
+      this.setState({
+        best: newBest
+      });
+    }
+    alert("Game over!");
+    this.resetGame();
   }
 
   render() {
     return (
       <React.Fragment>
-        <main>
-          <Guess onClick={this.guessCard} />
-          <ResultGrid cards={this.props.cards} index={this.state.index} />
+        <main style={{ width: '100%' }}>
+          <Container maxWidth="lg">
+            <GuessWrapper
+              onGuess={this.onGuess}
+              cardNumber={this.state.counter} />
+            <ResultGrid
+              cards={this.props.cards}
+              cardNumber={this.state.counter} />
+          </Container>
         </main>
       </React.Fragment>
     );
