@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/libfasc/static/css/main.b100e6da.chunk.css",
-    "main.js": "/libfasc/static/js/main.ef3f06d5.chunk.js",
-    "main.js.map": "/libfasc/static/js/main.ef3f06d5.chunk.js.map",
+    "main.js": "/libfasc/static/js/main.a8379f7f.chunk.js",
+    "main.js.map": "/libfasc/static/js/main.a8379f7f.chunk.js.map",
     "runtime-main.js": "/libfasc/static/js/runtime-main.68cfb477.js",
     "runtime-main.js.map": "/libfasc/static/js/runtime-main.68cfb477.js.map",
-    "static/js/2.da2de828.chunk.js": "/libfasc/static/js/2.da2de828.chunk.js",
-    "static/js/2.da2de828.chunk.js.map": "/libfasc/static/js/2.da2de828.chunk.js.map",
+    "static/js/2.49572a60.chunk.js": "/libfasc/static/js/2.49572a60.chunk.js",
+    "static/js/2.49572a60.chunk.js.map": "/libfasc/static/js/2.49572a60.chunk.js.map",
     "index.html": "/libfasc/index.html",
-    "precache-manifest.3f29b0faddaeba9a5bd0fbba970e73b0.js": "/libfasc/precache-manifest.3f29b0faddaeba9a5bd0fbba970e73b0.js",
+    "precache-manifest.2cec2e61c50105ed191ecdbe2d11fca8.js": "/libfasc/precache-manifest.2cec2e61c50105ed191ecdbe2d11fca8.js",
     "service-worker.js": "/libfasc/service-worker.js",
     "static/css/main.b100e6da.chunk.css.map": "/libfasc/static/css/main.b100e6da.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.68cfb477.js",
-    "static/js/2.da2de828.chunk.js",
+    "static/js/2.49572a60.chunk.js",
     "static/css/main.b100e6da.chunk.css",
-    "static/js/main.ef3f06d5.chunk.js"
+    "static/js/main.a8379f7f.chunk.js"
   ]
 }
