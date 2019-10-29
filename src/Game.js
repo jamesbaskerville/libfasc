@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const slapSoundPath = process.env.PUBLIC_URL + "sounds/slap.m4a";
+const slapSoundPath = process.env.PUBLIC_URL + "/sounds/slap.m4a";
 
 // play slap with random volume between 0.3 and 1
 const playSlap = () => {
